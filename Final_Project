@@ -1,1 +1,101 @@
+# 1. Load Libraries
+library(tidyverse)
 
+# 2. Read in the Data
+adult_income <- read_csv("/Users/siyona/STAT 184/adult_income.csv")
+college_majors <- read_csv("/Users/siyona/STAT 184/college_majors.csv")
+
+# Clean adult_income (corrected version)
+adult_income <- adult_income %>%
+  mutate(across(where(is.character), ~na_if(., "?"))) %>%
+  drop_na()
+
+# Clean college_majors (nothing needed)
+
+# Create Major Group columns
+college_majors <- college_majors %>%
+  rename(Major_Group = Major_category)
+
+adult_income <- adult_income %>%
+  mutate(Major_Group = case_when(
+    str_detect(education, "Bachelors|Some-college") ~ "Business",
+    str_detect(education, "Masters") ~ "Health",
+    str_detect(education, "Doctorate") ~ "Engineering",
+    str_detect(education, "Assoc-acdm|Assoc-voc") ~ "Technical Fields",
+    str_detect(education, "HS-grad") ~ "Skilled Trades",
+    str_detect(education, "Prof-school") ~ "Law & Public Policy",
+    TRUE ~ "Other"
+  ))
+
+# Summarize
+# Redo summaries
+adult_summary <- adult_income %>%
+  group_by(Major_Group) %>%
+  summarise(Avg_Hours = mean(`hours-per-week`, na.rm = TRUE))
+
+college_summary <- college_majors %>%
+  group_by(Major_Group) %>%
+  summarise(Median_Earnings = median(Median, na.rm = TRUE))
+
+# Redo merge
+merged_summary <- adult_summary %>%
+  inner_join(college_summary, by = "Major_Group")
+# Merge
+merged_summary <- adult_summary %>%
+  inner_join(college_summary, by = "Major_Group")
+
+# First, make sure Major_Group is correctly named in college_majors
+college_majors <- college_majors %>%
+  rename(Major_Group = Major_category)
+
+# Create the Boxplot: Distribution of Median Earnings by Major Group
+ggplot(college_majors, aes(x = Major_Group, y = Median, fill = Major_Group)) +
+  geom_boxplot() +
+  labs(
+    title = "Distribution of Median Earnings by Major Group",
+    x = "Major Group",
+    y = "Median Earnings ($)"
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  guides(fill = FALSE)
+
+# Bar Chart: Avg Hours vs Median Earnings
+ggplot(merged_summary, aes(x = reorder(Major_Group, Median_Earnings), y = Median_Earnings, fill = Major_Group)) +
+  geom_col() +
+  labs(
+    title = "Median Earnings by Major Group",
+    x = "Major Group",
+    y = "Median Earnings ($)"
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  guides(fill = FALSE)
+
+# Summarize adult_income to get median hours per education level
+education_hours_summary <- adult_income %>%
+  group_by(education) %>%
+  summarise(Median_Hours = median(`hours-per-week`, na.rm = TRUE))
+
+# Bar Plot: Median Hours Worked by Education Level
+ggplot(education_hours_summary, aes(x = reorder(education, Median_Hours), y = Median_Hours, fill = education)) +
+  geom_col() +
+  labs(
+    title = "Median Hours Worked per Week by Education Level",
+    x = "Education Level",
+    y = "Median Hours Worked per Week"
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+  guides(fill = FALSE)
+
+# Boxplot: Education vs Hours Worked
+ggplot(adult_income, aes(x = education, y = `hours-per-week`)) +
+  geom_boxplot() +
+  labs(
+    title = "Education Level vs Hours Worked per Week",
+    x = "Education Level",
+    y = "Hours Worked per Week"
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
