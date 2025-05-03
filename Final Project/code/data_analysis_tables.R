@@ -2,8 +2,8 @@
 library(tidyverse)
 
 # Load cleaned data
-adult_income <- read_csv("/Users/siyona/STAT 184/Final Project/data/cleaned_adult_income.csv")
-college_majors <- read_csv("/Users/siyona/STAT 184/Final Project/data/cleaned_college_majors.csv")
+adult_income <- read_csv("Final_Project/cleaned_adult_income.csv")
+college_majors <- read_csv("Final_Project/cleaned_college_majors.csv")
 
 # Summarize average hours worked per week by Major Group
 adult_summary <- adult_income %>%
@@ -26,5 +26,5 @@ intersect(unique(adult_income$Major_Group), unique(college_majors$Major_Group))
 View(adult_summary)
 View(college_summary)
 View(merged_summary)
-write_csv(merged_summary, "/Users/siyona/STAT 184/Final Project/data/merged_summary.csv")
+write_csv(merged_summary, "Final_project/merged_summary.csv")
 colnames(merged_summary)
