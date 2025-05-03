@@ -2,8 +2,8 @@
 library(tidyverse)
 
 # Load cleaned + merged data
-adult_income <- read_csv("/Users/siyona/STAT 184/Final Project/data/adult_income.csv")
-merged_summary <- read_csv("/Users/siyona/STAT 184/Final Project/data/merged_summary.csv")
+adult_income <- read_csv("Final_Project/adult_income.csv")
+merged_summary <- read_csv("Final_Project/merged_summary.csv")
 
 # ---- 1. Bar Chart: Median Earnings by Major Group ----
 ggplot(merged_summary, aes(x = reorder(Major_Group, Median_Earnings), y = Median_Earnings, fill = Major_Group)) +
