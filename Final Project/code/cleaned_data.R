@@ -2,8 +2,8 @@
 library(tidyverse)
 
 # Load data
-adult_income <- read_csv("/Users/siyona/STAT 184/Final Project/data/adult_income.csv")
-college_majors <- read_csv("/Users/siyona/STAT 184/Final Project/data/college_majors.csv")
+adult_income <- read_csv("Final_Project/adult_income.csv")
+college_majors <- read_csv("Final_Project/data/college_majors.csv")
 
 # Clean missing values
 adult_income <- adult_income %>%
@@ -31,5 +31,5 @@ View(adult_income)
 View(college_majors)
 
 # Save cleaned data
-write_csv(adult_income, "/Users/siyona/STAT 184/Final Project/data/cleaned_adult_income.csv")
-write_csv(college_majors, "/Users/siyona/STAT 184/Final Project/data/cleaned_college_majors.csv")
+write_csv(adult_income, "Final_Project/cleaned_adult_income.csv")
+write_csv(college_majors, "Final_Project/cleaned_college_majors.csv")
