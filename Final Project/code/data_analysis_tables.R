@@ -30,9 +30,8 @@ merged_summary <- inner_join(adult_summary, college_summary, by = "Major_Group")
 unique(college_majors$Major_Group)
 intersect(unique(adult_income$Major_Group), unique(college_majors$Major_Group))
 
-# Optional: View all tables in RStudio viewer
+#View all tables in RStudio viewer
 View(adult_summary)
 View(college_summary)
 View(merged_summary)
 write_csv(merged_summary, "/Users/siyona/STAT 184/Final Project/data/merged_summary.csv")
-colnames(merged_summary)

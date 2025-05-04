@@ -5,7 +5,7 @@ library(tidyverse)
 adult_income <- read_csv("/Users/siyona/STAT 184/Final Project/data/adult_income.csv")
 merged_summary <- read_csv("/Users/siyona/STAT 184/Final Project/data/merged_summary.csv")
 
-# 1. Bar Chart: Education vs Median Hours Worked (ordered)
+# 1. Bar Chart: Education vs Median Hours Worked
 ggplot(education_hours_summary, aes(x = reorder(education, Median_Hours), y = Median_Hours)) +
   geom_col(fill = "steelblue") +
   labs(
@@ -35,16 +35,13 @@ ggplot(merged_summary, aes(x = reorder(Major_Group, Avg_Hours), y = Avg_Hours, f
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
   guides(fill = "none")
 
-#  4: Boxplot - Earnings by Major Group
-ggplot(college_majors, aes(x = Major_Group, y = Median)) +
-  geom_boxplot(fill = "orange") +
-  labs(
-    title = "Earnings Distribution Across Major Groups",
-    x = "Major Group",
-    y = "Median Earnings ($)"
-  ) +
+# 4. Boxplot: Hours Worked per Week by Sex
+ggplot(adult_income, aes(x = sex, y = `hours-per-week`, fill = sex)) +
+  geom_boxplot() +
+  labs(title = "Hours Worked per Week by Sex",
+       x = "Sex", y = "Hours per Week") +
   theme_minimal() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+  guides(fill = "none")
 
 #  5. Boxplot: Distribution of Hours by Education Level 
 ggplot(adult_income, aes(x = education, y = `hours-per-week`)) +
@@ -63,7 +60,7 @@ ggplot(adult_income, aes(x = workclass, y = `hours-per-week`, fill = workclass))
   guides(fill = "none")
 
 
-#  7. Heatmap: Hours by Age Group and Education 
+# 7. Heatmap: Hours by Age Group and Education 
 adult_income <- adult_income %>%
   mutate(Age_Group = cut(age, breaks = c(17, 25, 35, 45, 55, 65, 90), labels = c("18–25", "26–35", "36–45", "46–55", "56–65", "66+")))
 

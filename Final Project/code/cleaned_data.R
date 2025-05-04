@@ -9,9 +9,14 @@ college_majors <- read_csv("/Users/siyona/STAT 184/Final Project/data/college_ma
 adult_income <- adult_income %>%
   mutate(across(where(is.character), ~na_if(., "?"))) %>%
   drop_na()
-
-# Create a cleaned and ordered education level factor
-# Create Major_Group column with correctly grouped education levels
+# Combine all education levels < high school into one category
+adult_income <- adult_income %>%
+  mutate(education = case_when(
+    education %in% c("Preschool", "1st-4th", "5th-6th", "7th-8th",
+                     "9th", "10th", "11th", "12th") ~ "Less than HS",
+    TRUE ~ education
+  ))
+# Create Major_Group column with correctly grouped job types and education levels
 adult_income <- adult_income %>%
   mutate(
     Major_Group = case_when(
@@ -25,7 +30,7 @@ adult_income <- adult_income %>%
   )
 #Dropping columns we don't need and only keeping relevant ones 
 adult_income <- adult_income %>%
-  select(education, `hours-per-week`, sex, age, race, Major_Group)
+  select(education, `hours-per-week`, sex, age, race, workclass, Major_Group)
 
 # Clean college majors
 college_majors <- college_majors %>%
