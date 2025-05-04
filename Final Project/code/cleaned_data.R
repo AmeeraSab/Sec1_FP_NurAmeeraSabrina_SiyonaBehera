@@ -10,17 +10,23 @@ adult_income <- adult_income %>%
   mutate(across(where(is.character), ~na_if(., "?"))) %>%
   drop_na()
 
-# Create Major_Group
+# Create a cleaned and ordered education level factor
 adult_income <- adult_income %>%
-  mutate(Major_Group = case_when(
-    str_detect(education, "Bachelors|Some-college") & str_detect(occupation, "Engineer|Tech-support|Craft-repair") ~ "Engineering",
-    str_detect(education, "Bachelors|Some-college") & str_detect(occupation, "Exec-managerial|Sales|Adm-clerical|Protective-serv") ~ "Business",
-    str_detect(education, "Masters|Bachelors|Some-college") & str_detect(occupation, "Prof-specialty|Health|Education|Social") ~ "Health",
-    str_detect(education, "Prof-school") ~ "Law & Public Policy",
-    str_detect(education, "Assoc-acdm|Assoc-voc") ~ "Industrial Arts & Consumer Services",
-    str_detect(education, "HS-grad") ~ "Skilled Trades",
-    TRUE ~ "Other"
-  ))
+  mutate(
+    education_grouped = case_when(
+      education %in% c("Preschool", "1st-4th", "5th-6th", "7th-8th", "9th", "10th", "11th", "12th") ~ "Less than HS",
+      education %in% c("HS-grad") ~ "High School",
+      education %in% c("Some-college", "Assoc-acdm", "Assoc-voc") ~ "Some College or Associate",
+      education %in% c("Bachelors") ~ "Bachelors",
+      education %in% c("Masters") ~ "Masters",
+      education %in% c("Doctorate", "Prof-school") ~ "Graduate or Professional",
+      TRUE ~ "Other"
+    ),
+    education_grouped = factor(education_grouped, levels = c(
+      "Less than HS", "High School", "Some College or Associate", 
+      "Bachelors", "Masters", "Graduate or Professional", "Other"
+    ))
+  )
 
 # Clean college majors
 college_majors <- college_majors %>%
