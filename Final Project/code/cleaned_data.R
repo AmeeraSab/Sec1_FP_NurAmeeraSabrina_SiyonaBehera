@@ -11,26 +11,26 @@ adult_income <- adult_income %>%
   drop_na()
 
 # Create a cleaned and ordered education level factor
+# Create Major_Group column with correctly grouped education levels
 adult_income <- adult_income %>%
   mutate(
-    education_grouped = case_when(
-      education %in% c("Preschool", "1st-4th", "5th-6th", "7th-8th", "9th", "10th", "11th", "12th") ~ "Less than HS",
-      education %in% c("HS-grad") ~ "High School",
-      education %in% c("Some-college", "Assoc-acdm", "Assoc-voc") ~ "Some College or Associate",
-      education %in% c("Bachelors") ~ "Bachelors",
-      education %in% c("Masters") ~ "Masters",
-      education %in% c("Doctorate", "Prof-school") ~ "Graduate or Professional",
+    Major_Group = case_when(
+      str_detect(education, "Bachelors|Some-college") & str_detect(occupation, "Engineer|Tech-support|Craft-repair") ~ "Engineering",
+      str_detect(education, "Bachelors|Some-college") & str_detect(occupation, "Exec-managerial|Sales|Adm-clerical|Protective-serv") ~ "Business",
+      str_detect(education, "Masters|Bachelors|Some-college") & str_detect(occupation, "Prof-specialty|Health|Education|Social") ~ "Health",
+      str_detect(education, "Prof-school") ~ "Law & Public Policy",
+      str_detect(education, "Assoc-acdm|Assoc-voc") ~ "Industrial Arts & Consumer Services",
       TRUE ~ "Other"
-    ),
-    education_grouped = factor(education_grouped, levels = c(
-      "Less than HS", "High School", "Some College or Associate", 
-      "Bachelors", "Masters", "Graduate or Professional", "Other"
-    ))
+    )
   )
+#Dropping columns we don't need and only keeping relevant ones 
+adult_income <- adult_income %>%
+  select(education, `hours-per-week`, sex, age, race, Major_Group)
 
 # Clean college majors
 college_majors <- college_majors %>%
-  rename(Major_Group = Major_category)
+  rename(Major_Group = Major_category) %>%
+  select(Major, Major_Group, Median)
 
 # View cleaned data
 View(adult_income)
@@ -39,3 +39,4 @@ View(college_majors)
 # Save cleaned data
 write_csv(adult_income, "/Users/siyona/STAT 184/Final Project/data/cleaned_adult_income.csv")
 write_csv(college_majors, "/Users/siyona/STAT 184/Final Project/data/cleaned_college_majors.csv")
+
