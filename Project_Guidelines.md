@@ -34,18 +34,18 @@ This project has several key dates that you need to be aware of.
 
 We present the guidelines as a checklist in this file. This means that your team can edit this file and check items off the list by placing an x inside of the square brackets at the start of each item (i.e., [x]). This will help your team keep track of what you've completed and what you have left to do.
 
-- [ ] Read through the Project Guidelines.
-- [ ] Find 1 or 2 other individuals from the same section of Stat 184 who you want to work with and form a team. (We will help you form teams if you do not already have one by the team finalization date for your section.)
-- [ ] Create a repo using this template repo. Name your repo `Sec#_FP_Name1_Name2_Name3` where `Sec#` is your section of Stat184 (i.e., `Sec1`, `Sec2`, `Sec3`, or `Sec4`) and `Name#` is replaced with the names of each team member.
+- [X] Read through the Project Guidelines.
+- [X] Find 1 or 2 other individuals from the same section of Stat 184 who you want to work with and form a team. (We will help you form teams if you do not already have one by the team finalization date for your section.)
+- [X] Create a repo using this template repo. Name your repo `Sec#_FP_Name1_Name2_Name3` where `Sec#` is your section of Stat184 (i.e., `Sec1`, `Sec2`, `Sec3`, or `Sec4`) and `Name#` is replaced with the names of each team member.
   - [ ] The owner of the repo should be `Stat184-Spring2025`. 
-- [ ] Make sure that each team member has access to the repo.
-- [ ] Come up with a topic and set of research questions your team will explore.
-- [ ] Make a plan for your work. We suggested putting together your work plan ASAP.
-- [ ] Locate appropriate data sources for your project.
-  - [ ] Your main data source may __not__ be one that we used in class. If you are interested in using data found in an R package, please consult with your instructor first.
-  - [ ] Supplementary data sources may come from anywhere.
-- [ ] Read in your data and perform any necessary data tidying, wrangling, and cleaning.
-- [ ] Conduct Exploratory Data Analysis.
+- [X] Make sure that each team member has access to the repo.
+- [X] Come up with a topic and set of research questions your team will explore.
+- [X] Make a plan for your work. We suggested putting together your work plan ASAP.
+- [X] Locate appropriate data sources for your project.
+  - [X] Your main data source may __not__ be one that we used in class. If you are interested in using data found in an R package, please consult with your instructor first.
+  - [X] Supplementary data sources may come from anywhere.
+- [X] Read in your data and perform any necessary data tidying, wrangling, and cleaning.
+- [X] Conduct Exploratory Data Analysis.
 - [ ] Prepare a reproducible report.
   - [ ] Use a QMD file; the output type is PDF.
   - [ ] The report should be well organized with section headings.
@@ -73,15 +73,15 @@ We present the guidelines as a checklist in this file. This means that your team
 - [ ] Use GitHub to share changes and edits; there should be multiple commits to your repo.
   - [ ] Each team should update the included README file to match their project.
   - [ ] Each team member must have at least two (2) commits in the repo's history.
-  - [ ] There should be a Main branch and at least one development ("dev") branch for the repo.
+  - [X] There should be a Main branch and at least one development ("dev") branch for the repo.
   - [ ] There should be at must be at least one Pull Request that resulted in a successful merging of two branches.
   - [ ] One team member should create the Pull Request while a *different* team member should review and complete the Pull Request.
   - [ ] Ensure that your instructor has access to your repo.
   - [ ] __Optional:__ Use the repo's Issues system to track and address any problems, core tasks, etc. 
 - [ ] All code should be written according to a Style Guide of your choice. List this Style Guide as a code comment in your first code chunk.
   - __Possible Style Guides:__ There are several different coding Style Guides you can follow; here are a few. [The BOAST Style Guide](https://educationshinyappteam.github.io/Style_Guide/coding.html), [The Tidyverse Style Guide](https://style.tidyverse.org/), [Google's R Style Guide](https://google.github.io/styleguide/Rguide.html)
-- [ ] Sign up for your Work-in-Progress Presentation
-- [ ] Complete your Work-in-Progress Presentation (details below)
+- [X] Sign up for your Work-in-Progress Presentation
+- [X] Complete your Work-in-Progress Presentation (details below)
 - [ ] Finalize your work and submit your report as a __PDF__ to the appropriate submission portal in Canvas by the deadline.
   - [ ] As a comment on your submission, include a link to your team's project repo.
 - [ ] Each team member must complete their Peer & Self Evaluations for working together on this project. This will be an assignment in MyOpenMath and needs to be completed by the deadline.
